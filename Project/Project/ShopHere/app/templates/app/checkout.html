@@ -1,0 +1,58 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}CheckOut{% endblock title %}
+<script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+{% block main_content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-6">
+            <h4>Order Summary</h4>
+            <hr>
+
+            {% for item in cart_items %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5>Product: {{item.product.title}}</h5>
+                        <p>Quantity: {{item.quantity}}</p>
+                        <p class="fw-bold">Price: {{item.total_cost}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <p class="fw-bold">Total Cost + Rs. 70 = {{totalamount}}</p>
+
+            <small>
+                Term and Condition: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem quos eligendi, sapiente at unde reiciendis commodi ex architecto omnis odio magni amet sint. Tempora, nesciunt! Possimus soluta repellendus nihil. Quidem?
+            </small>
+        </div>
+
+        <div class="col-sm-4 offset-sm-1">
+            <h4>Select Shipping Address</h4>
+            <hr>
+
+            <form  id="myform">
+                {% for ad in add %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>{{ad.name}}</h5>
+                            <p>{{ad.locality}}, {{ad.city}}, {{ad.state}}-{{ad.zipcode}}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-check mt-2 mb-5">
+                        <input class="form-check-input" type="radio"name="custid" id="custid{{forloop.counter}}" value="{{ad.id}}">
+                        <label class="form-check-label" for="">
+                            Address: {{forloop.counter}}
+                        </label>
+                    </div>
+                {% endfor %}
+                
+                <a href="{% url 'payment' %}" class="nav-link custom-button bg-secondary">Pay with Khalti</a>  
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
+
+
+

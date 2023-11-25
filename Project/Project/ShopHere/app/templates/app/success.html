@@ -1,0 +1,13 @@
+{% extends 'app/base.html' %}
+{% block title %}Success Message{% endblock title %}
+
+{% block main_content %}
+<div class="container">
+    <div class="row my-3">
+        <h2 style="text-align: center; color: green;">Order Successful</h2>
+        <p> You can send feedbacks in the <a href=" {% url 'contact' %}">Contact Page</a></p>
+        <a href="{% url 'orders' %}" class="btn btn-secondary">Go to Orders</a>
+
+    </div>
+</div>
+{% endblock main_content %}
